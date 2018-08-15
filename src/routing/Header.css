@@ -1,0 +1,10 @@
+.main-nav {
+    background-color: #44b78b;
+    padding: 1px;
+}
+ul.nav-list.left-list {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    width: 25%;
+}

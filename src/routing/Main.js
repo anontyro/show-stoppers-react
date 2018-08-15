@@ -3,7 +3,7 @@ import HomeView from '../features/HomeView';
 import AboutView from '../features/AboutView';
 import SearchView from '../features/SearchView';
 import { Switch, Route } from 'react-router-dom';
-
+import './Main.css';
 const Main = () =>{
 
 
