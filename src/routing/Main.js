@@ -1,13 +1,20 @@
 import React from 'react';
-
+import HomeView from '../features/HomeView';
+import AboutView from '../features/AboutView';
+import SearchView from '../features/SearchView';
+import { Switch, Route } from 'react-router-dom';
 
 const Main = () =>{
 
 
     return(
-        <div>
-            <h1>This is the homepage</h1>
-        </div>
+        <main>
+            <Switch>
+                <Route exact path='/' component={HomeView} />
+                <Route exact path='/about' component={AboutView} />
+                <Route path='/search' component={SearchView} />
+            </Switch>
+        </main>
     );
 };
 
