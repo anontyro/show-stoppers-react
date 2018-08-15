@@ -5,8 +5,6 @@ import SearchView from '../features/SearchView';
 import { Switch, Route } from 'react-router-dom';
 import './Main.css';
 const Main = () =>{
-
-
     return(
         <main>
             <Switch>
