@@ -8,8 +8,7 @@ class HomeView extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            showList: [],
-            test: 'THis is a test'
+            showList: []
         };
     }
 

@@ -1,0 +1,25 @@
+.showGrid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.show-container {
+    max-width: 150px;
+    cursor: pointer;
+}
+.img-container{
+    background-color: unset;
+}
+.img-container:hover{
+    background-color: green;
+}
+img.poster {
+    max-width: 150px;
+}
+img.poster:hover{
+    opacity: 0.5;
+}
+
+.show-title{
+    text-align: center;
+}
