@@ -2,7 +2,6 @@ import React,{Component} from 'react';
 import ShowItem from './components/ShowItem';
 import ApiHandler from '../services/http/ApiHandler';
 
-
 class HomeView extends Component {
 
     constructor(props) {
@@ -12,22 +11,24 @@ class HomeView extends Component {
         };
     }
 
-    render() {
-
+    componentDidMount() {
         let showList = [];
 
-    const apiHandler = new ApiHandler();
-    apiHandler.getNowAiring()
-        .then(response => response.response.results)
-        .then(shows => {
-            for (let i = 0; i < shows.length; i++) {
-                showList.push(<ShowItem show={shows[i]} key={shows[i].id} />);
-            }
-            this.setState({
-                showList: showList
-            });
+        const apiHandler = new ApiHandler();
 
-        });
+        apiHandler.getNowAiring()
+            .then(response => response.response.results)
+            .then(shows => {
+                for (let i = 0; i < shows.length; i++) {
+                    showList.push(<ShowItem show={shows[i]} key={shows[i].id} />);
+                }
+                this.setState({
+                    showList: showList
+                });
+            });
+    }
+
+    render() {
 
         return (
         <div className='home-container'>
@@ -40,29 +41,5 @@ class HomeView extends Component {
     }
 
 }
-
-// const HomeView = () => {
-//     let showList = [];
-
-//     const apiHandler = new ApiHandler();
-//     apiHandler.getNowAiring()
-//         .then(response => response.response.results)
-//         .then(shows => {
-//             for (let i = 0; i < shows.length; i++) {
-//                 showList.push(<ShowItem show={shows[i]} />);
-//             }
-
-//         });
-
-//     return (
-//         <div className='home-container'>
-//             <h1>Default homepage</h1>
-//             <div className='showGrid'>
-//                 {showList}
-//             </div>
-//         </div>
-//     );
-// }
-
 
 export default HomeView;

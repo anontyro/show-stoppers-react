@@ -6,5 +6,5 @@ ul.nav-list.left-list {
     list-style: none;
     display: flex;
     justify-content: space-between;
-    width: 180%;
+    width: 180px;
 }
