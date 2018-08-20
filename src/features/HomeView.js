@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import ShowItem from './components/ShowItem';
 import ApiHandler from '../services/http/ApiHandler';
+import {connect} from 'react-redux';
 
 class HomeView extends Component {
 
@@ -13,6 +14,8 @@ class HomeView extends Component {
 
     componentDidMount() {
         let showList = [];
+
+        console.log(this.props.getNowShowing());
 
         const apiHandler = new ApiHandler();
 
@@ -30,6 +33,8 @@ class HomeView extends Component {
 
     render() {
 
+        console.log(this.props.nowShowing);
+
         return (
         <div className='home-container'>
             <h1>Default homepage</h1>
@@ -39,7 +44,18 @@ class HomeView extends Component {
         </div>
         );
     }
-
 }
 
-export default HomeView;
+const mapStateToProps = state => {
+    return {
+        nowShowing: state.nowShowingList
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        getNowShowing: () => dispatch({type: 'GET_NOW_SHOWING'})
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeView);
