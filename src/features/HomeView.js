@@ -5,10 +5,6 @@ import {connect} from 'react-redux';
 
 class HomeView extends Component {
 
-    constructor(props) {
-        super(props);
-    }
-
     componentDidMount() {
         let showList = [];
 
@@ -22,7 +18,7 @@ class HomeView extends Component {
                 }
                 this.props.setNowShowing(showList);
 
-            });
+        });
     }
 
     render() {

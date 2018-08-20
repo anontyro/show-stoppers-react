@@ -1,4 +1,3 @@
-import ApiHandler from '../services/http/ApiHandler';
 
 const initalState = {
     nowShowingList: []
