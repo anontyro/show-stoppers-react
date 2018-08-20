@@ -1,3 +1,5 @@
+import ApiHandler from '../services/http/ApiHandler';
+
 const initalState = {
     nowShowingList: []
 };
@@ -5,15 +7,19 @@ const initalState = {
 const reducer = (state = initalState, action) => {
 
     if(action.type === 'GET_NOW_SHOWING') {
-        if(state.nowShowingList.length === 0){
-            return {
-                nowShowingList: [{item: 'test1'}, {item: 'test2'}]
-            }
-        } else {
-            console.log('cached data');
+        return {
+            nowShowingList: state.nowShowingList
+        }
+    }
+
+    if(action.type === 'SET_NOW_SHOWING') {
+        if(state.nowShowingList.length > 0) {
             return {
                 nowShowingList: state.nowShowingList
             }
+        }
+        return {
+            nowShowingList: action.value
         }
     }
 

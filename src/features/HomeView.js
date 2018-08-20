@@ -7,15 +7,10 @@ class HomeView extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            showList: []
-        };
     }
 
     componentDidMount() {
         let showList = [];
-
-        console.log(this.props.getNowShowing());
 
         const apiHandler = new ApiHandler();
 
@@ -25,21 +20,19 @@ class HomeView extends Component {
                 for (let i = 0; i < shows.length; i++) {
                     showList.push(<ShowItem show={shows[i]} key={shows[i].id} />);
                 }
-                this.setState({
-                    showList: showList
-                });
+                this.props.setNowShowing(showList);
+
             });
     }
 
     render() {
 
-        console.log(this.props.nowShowing);
 
         return (
         <div className='home-container'>
             <h1>Default homepage</h1>
             <div className='showGrid'>
-                {this.state.showList}
+                {this.props.nowShowing}
             </div>
         </div>
         );
@@ -54,7 +47,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        getNowShowing: () => dispatch({type: 'GET_NOW_SHOWING'})
+        setNowShowing: (list) => dispatch({type: 'SET_NOW_SHOWING', value: list})
     };
 };
 
