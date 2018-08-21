@@ -14,10 +14,12 @@ const reducer = (state = initalState, action) => {
     if(action.type === 'SET_NOW_SHOWING') {
         if(state.nowShowingList.length > 0) {
             return {
+                ...state,
                 nowShowingList: state.nowShowingList
             }
         }
         return {
+            ...state,
             nowShowingList: action.value
         }
     }
