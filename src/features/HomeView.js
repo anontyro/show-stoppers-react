@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import ShowItem from './components/ShowItem';
 import ApiHandler from '../services/http/ApiHandler';
 import {connect} from 'react-redux';
+import * as actionType from '../data/actions';
 
 class HomeView extends Component {
 
@@ -43,7 +44,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        setNowShowing: (list) => dispatch({type: 'SET_NOW_SHOWING', value: list})
+        setNowShowing: (list) => dispatch({type: actionType.SET_NOW_SHOWING, value: list})
     };
 };
 
