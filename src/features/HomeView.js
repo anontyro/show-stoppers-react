@@ -37,7 +37,7 @@ class HomeView extends Component {
 
 const mapStateToProps = state => {
     return {
-        nowShowing: state.nowShowingList
+        nowShowing: state.home.nowShowingList
     };
 };
 

@@ -3,7 +3,7 @@ const initalState = {
     nowShowingList: []
 };
 
-const reducer = (state = initalState, action) => {
+export default (state = initalState, action) => {
 
     if(action.type === 'GET_NOW_SHOWING') {
         return {
@@ -26,5 +26,3 @@ const reducer = (state = initalState, action) => {
 
     return state;
 }
-
-export default reducer;
