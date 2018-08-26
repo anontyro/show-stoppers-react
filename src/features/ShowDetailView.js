@@ -1,5 +1,7 @@
 import React,{Component} from 'react';
+import { connect } from 'react-redux';
 import ApiHandler from '../services/http/ApiHandler';
+import * as actionType from '../data/actions';
 
 class ShowDetailView extends Component {
     constructor(props) {
@@ -13,7 +15,7 @@ class ShowDetailView extends Component {
     componentDidMount() {
         const apiHandler = new ApiHandler();
 
-        apiHandler.getShowDetails(this.state.showId)
+        apiHandler.getShowDetails(this.props.match.params.id)
             .then(response => {
                 console.log(response);
                 return response.response
@@ -43,7 +45,13 @@ class ShowDetailView extends Component {
     }
 }
 
+const mapStateToProps = state => ({
+    showDetail: state.detail.showDetail,
+});
 
+const mapDispatchToProps = dispatch => ({
+    setShowDetail: show => dispatch({type: actionType.SET_SHOW_DETAIL, value: show}),
 
+});
 
-export default ShowDetailView;
+export default connect(mapStateToProps, mapDispatchToProps)(ShowDetailView);

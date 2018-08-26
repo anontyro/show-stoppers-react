@@ -1,2 +1,3 @@
 export const GET_NOW_SHOWING = 'GET_NOW_SHOWING';
 export const SET_NOW_SHOWING = 'SET_NOW_SHOWING';
+export const SET_SHOW_DETAIL = 'SET_SHOW_DETAIL';
