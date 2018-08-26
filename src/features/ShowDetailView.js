@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ApiHandler from '../services/http/ApiHandler';
 import * as actionType from '../data/actions';
+import ShowDetailMain from './components/DetailComponents/ShowDetailMain';
+import ShowsSideInfo from './components/DetailComponents/ShowsSideInfo';
+import ShowSideInfo from './components/DetailComponents/ShowsSideInfo';
 
+import './ShowDetailView.css';
 class ShowDetailView extends Component {
 
     componentDidMount() {
@@ -24,16 +28,21 @@ class ShowDetailView extends Component {
 
         if (this.props.showDetail){
             showView = (
-                <div>
-                    <p>{this.props.showDetail.name}</p>
+                <div className='show-detail-container'>
+                    <ShowSideInfo show = {this.props.showDetail}></ShowSideInfo>
+                    <ShowDetailMain show={this.props.showDetail}></ShowDetailMain>
+                </div>
+            );
+        } else {
+            showView = (
+                <div className='page-loader'>
+                    Loading...
                 </div>
             );
         }
 
         return (
             <div>
-                <p>Detail View</p>
-                <p>Show ID: {this.props.match.params.id}</p>
                 {showView}
             </div>
         )

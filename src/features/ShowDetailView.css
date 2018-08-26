@@ -1,0 +1,13 @@
+
+.show-detail-container {
+    display: flex;
+}
+
+.detail-left-container {
+    margin: 0 20px;
+    width: 345px;
+}
+
+.detail-main-container {
+    width: 100%;
+}
