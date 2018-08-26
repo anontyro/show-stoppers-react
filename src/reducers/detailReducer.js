@@ -8,7 +8,7 @@ export default (state = initalState, action) => {
     if (action.type === actionType.SET_SHOW_DETAIL) {
         return {
             ...state,
-            showDetail: state.showDetail,
+            showDetail: action.value,
         };
     }
 
