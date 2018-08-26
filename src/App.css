@@ -5,3 +5,10 @@ a {
 a:hover{
     color: white;
 }
+
+.my-subheader {
+    font-size: 1.6em;
+    margin: auto;
+    color: #44b78b;
+    /* text-align: left; */
+}
