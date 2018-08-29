@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ApiHandler from '../services/http/ApiHandler';
-import * as actionType from '../data/actions';
+import * as actionList from '../actions/actionCreators';
 import ShowDetailMain from './components/DetailComponents/ShowDetailMain';
 import ShowsSideInfo from './components/DetailComponents/ShowsSideInfo';
 import ShowSideInfo from './components/DetailComponents/ShowsSideInfo';
@@ -54,7 +54,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    setShowDetail: show => dispatch({type: actionType.SET_SHOW_DETAIL, value: show}),
+    setShowDetail: show => dispatch(actionList.setShowDetail(show)),
 
 });
 

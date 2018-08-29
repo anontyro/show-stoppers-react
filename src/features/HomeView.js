@@ -1,23 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import ShowItem from './components/ShowItem';
-import ApiHandler from '../services/http/ApiHandler';
-import * as actionType from '../data/actions';
+
+import * as actionList from '../actions/actionCreators';
 
 class HomeView extends Component {
   componentDidMount() {
-    const showList = [];
+  
+    this.props.getNowShowing();
 
-    const apiHandler = new ApiHandler();
-
-    apiHandler.getNowAiring()
-      .then(response => response.response.results)
-      .then((shows) => {
-        for (let i = 0; i < shows.length; i += 1) {
-          showList.push(<ShowItem show={shows[i]} key={shows[i].id} />);
-        }
-        this.props.setNowShowing(showList);
-      });
   }
 
   render() {
@@ -37,7 +27,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  setNowShowing: list => dispatch({ type: actionType.SET_NOW_SHOWING, value: list }),
+  setNowShowing: list => dispatch(actionList.getNowShowing(list)),
+  getNowShowing: () => dispatch(actionList.nowShowingList())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeView);
