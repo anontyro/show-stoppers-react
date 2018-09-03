@@ -27,6 +27,29 @@ export const nowShowingList = () => {
     }
 }
 
+export const getSimilarShows = (list) => {
+    return {
+        type: actions.GET_SIMILAR_SHOWS,
+        value: list
+    }
+}
+
+export const similarShowList = (id) => {
+    const apiHandler = new ApiHandler();
+    const showList = [];
+
+    return dispatch => {
+        apiHandler.getSimilarShows(id)
+            .then(response => response.response.results)
+            .then(shows => {
+                for (let i=0; i< shows.length; i+=1) {
+                    showList.push(<ShowItem show={shows[i]} key={shows[i].id} />);
+                }
+                dispatch(getSimilarShows(showList));
+            });
+    }
+}
+
 export const setShowDetail = (show) => {
     return {
         type: actions.SET_SHOW_DETAIL,

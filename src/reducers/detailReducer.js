@@ -1,7 +1,8 @@
 import * as actionType from '../data/actions';
 
 const initalState = {
-    showDetail: {}
+    showDetail: {},
+    similarShows: [],
 };
 
 export default (state = initalState, action) => {
@@ -10,6 +11,13 @@ export default (state = initalState, action) => {
             ...state,
             showDetail: action.value,
         };
+    }
+
+    if(action.type === actionType.GET_SIMILAR_SHOWS) {
+        return {
+            ...state,
+            similarShows: action.value
+        }
     }
 
 

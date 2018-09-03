@@ -18,11 +18,15 @@ class ShowDetailView extends Component {
             })
             .then(show => {
                 console.log(show);
-                this.props.setShowDetail(show)
+                this.props.setShowDetail(show);
+                this.props.getSimilarShows(show.id);
             });
+
     }
 
     render(){
+
+        console.log(this.props.similarShows);
 
         let showView;
 
@@ -51,10 +55,12 @@ class ShowDetailView extends Component {
 
 const mapStateToProps = state => ({
     showDetail: state.detail.showDetail,
+    similarShows: state.detail.similarShows,
 });
 
 const mapDispatchToProps = dispatch => ({
     setShowDetail: show => dispatch(actionList.setShowDetail(show)),
+    getSimilarShows: id => dispatch(actionList.similarShowList(id)),
 
 });
 
