@@ -26,7 +26,7 @@ class ShowDetailView extends Component {
 
     render(){
 
-        console.log(this.props.similarShows);
+        // console.log(this.props.similarShows);
 
         let showView;
 

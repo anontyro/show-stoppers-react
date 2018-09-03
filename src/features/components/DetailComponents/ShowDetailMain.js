@@ -5,9 +5,34 @@ import GlobalVar from '../../../data/GlobalVars';
 
 const ShowDetailMain = (props) => {
 
+    const onSeasonBtn = (number) => {
+        console.log(number);
+    }
+
+    const buildSeasonList = (list) => {
+        const seasonList = [];
+        
+        if(!list) {
+            return null;
+        }
+
+        for (let i = 0; i < list.length; i++) {
+            seasonList.push(
+            <span className='season-link' key={list[i].id} onClick={() => onSeasonBtn(i)}>{i}</span>
+            )
+        }
+
+        return seasonList;
+    }
+
+
+
     return (
         <div className='detail-main-container'>
-            <p>Main section</p>
+            <p>
+                Seasons: 
+                {buildSeasonList(props.show.seasons)}
+            </p>
             <p>{props.show.name}</p>
         </div>
     );
