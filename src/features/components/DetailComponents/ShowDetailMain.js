@@ -1,6 +1,6 @@
 import React from 'react';
 import GlobalVar from '../../../data/GlobalVars';
-
+import './ShowDetailMain.css';
 
 
 const ShowDetailMain = (props) => {
@@ -29,6 +29,9 @@ const ShowDetailMain = (props) => {
 
     return (
         <div className='detail-main-container'>
+            <div className="header-tabs">
+
+            </div>
             <p>
                 Seasons: 
                 {buildSeasonList(props.show.seasons)}

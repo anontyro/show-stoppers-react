@@ -34,7 +34,10 @@ class ShowDetailView extends Component {
             showView = (
                 <div className='show-detail-container'>
                     <ShowSideInfo show = {this.props.showDetail}></ShowSideInfo>
-                    <ShowDetailMain show={this.props.showDetail}></ShowDetailMain>
+                    <ShowDetailMain 
+                        show={this.props.showDetail} 
+                        similarShows={this.props.similarShows}>
+                    </ShowDetailMain>
                 </div>
             );
         } else {

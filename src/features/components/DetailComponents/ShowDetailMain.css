@@ -1,0 +1,7 @@
+span.season-link {
+    margin: 5px;
+    cursor: pointer;
+}
+span.season-link:hover {
+    color: green;
+}
