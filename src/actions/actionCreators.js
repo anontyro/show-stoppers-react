@@ -3,6 +3,7 @@ import React from 'react';
 import ShowItem from '../features/components/ShowItem';
 import ApiHandler from '../services/http/ApiHandler';
 
+// set teh now showing list in the Redux store
 export const getNowShowing = (list) => {
     return {
         type: actions.SET_NOW_SHOWING,
@@ -10,6 +11,11 @@ export const getNowShowing = (list) => {
     };
 }
 
+/**
+ * Get a list of the top 20 items now showing on that day
+ * this will create the list of ShowItems to be used to display
+ * the output
+ */
 export const nowShowingList = () => {
     const apiHandler = new ApiHandler();
     const showList = [];
@@ -26,7 +32,7 @@ export const nowShowingList = () => {
         
     }
 }
-
+// pass the similarShowList value to redux store to update
 export const getSimilarShows = (list) => {
     return {
         type: actions.GET_SIMILAR_SHOWS,
@@ -34,6 +40,12 @@ export const getSimilarShows = (list) => {
     }
 }
 
+/**
+ * Method used to update redux state for similar shows to that of
+ * the title passed via its id, returns a complete
+ * list of ShowItems to be displayed
+ * @param {*} id 
+ */
 export const similarShowList = (id) => {
     const apiHandler = new ApiHandler();
     const showList = [];
@@ -55,4 +67,25 @@ export const setShowDetail = (show) => {
         type: actions.SET_SHOW_DETAIL,
         value: show
     }
+}
+
+export const getShowSeasonDetail = (list) => {
+    return {
+        type: actions.GET_SEASON_DETAIL,
+        value: list
+    }
+}
+
+export const showSeasonDetail = (showId, season) => {
+    const apiHandler = new ApiHandler();
+    const seasonList = {};
+
+    return dispatch => {
+        apiHandler.getSeasonDetail(showId, season)
+            .then(response => response.response)
+            .then(season => {
+                dispatch(getShowSeasonDetail(seasonList));
+            });
+    }
+
 }

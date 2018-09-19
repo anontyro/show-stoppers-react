@@ -67,7 +67,7 @@ class ApiHandler {
     /**
      * Get the episode detail for a specific season for a specific show
      * @param {*} showId specific unique showId number
-     * @param {*} season specific season number
+     * @param {int} season specific season number
      * @param {*} episode specific episode number
      */
     getEpisodeDetail(showId, season, episode) {
