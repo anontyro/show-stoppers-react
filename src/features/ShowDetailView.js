@@ -9,6 +9,10 @@ import ShowSideInfo from './components/DetailComponents/ShowsSideInfo';
 import './ShowDetailView.css';
 class ShowDetailView extends Component {
 
+    updateSeason = (showId, season) => {
+        return this.props.getSeason(showId, season);
+    }
+
     componentDidMount() {
         const apiHandler = new ApiHandler();
 
@@ -34,10 +38,11 @@ class ShowDetailView extends Component {
         if (this.props.showDetail){
             showView = (
                 <div className='show-detail-container'>
-                    <ShowSideInfo show = {this.props.showDetail}></ShowSideInfo>
+                    <ShowSideInfo show = {this.props.showDetail} season = {this.props.seasonDetail}></ShowSideInfo>
                     <ShowDetailMain 
                         show={this.props.showDetail} 
-                        similarShows={this.props.similarShows}>
+                        similarShows={this.props.similarShows}
+                        updateSeason = {this.updateSeason}>
                     </ShowDetailMain>
                 </div>
             );

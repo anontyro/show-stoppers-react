@@ -7,6 +7,7 @@ const ShowDetailMain = (props) => {
 
     const onSeasonBtn = (number) => {
         console.log(number);
+        props.updateSeason(props.show.id, number);
     }
 
     const buildSeasonList = (list) => {
@@ -16,7 +17,7 @@ const ShowDetailMain = (props) => {
             return null;
         }
 
-        for (let i = 0; i < list.length; i++) {
+        for (let i = 1; i < list.length; i++) {
             seasonList.push(
             <span className='season-link' key={list[i].id} onClick={() => onSeasonBtn(i)}>{i}</span>
             )
