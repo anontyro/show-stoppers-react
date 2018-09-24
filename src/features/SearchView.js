@@ -1,10 +1,27 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import * as actionList from '../actions/actionCreators';
 
-const SearchView = () =>{
+class SearchView extends Component {
+    componentDidMount() {
 
-    return(
-        <p>Default Search View</p>
-    );
+    }
+
+    render() {
+        return (
+            <p>Default Search View</p>
+
+        );
+    }
+
 }
 
-export default SearchView;
+const mapStateToProps = state => ({
+    searchResults: state.home.searchResults,
+});
+
+const mapDispatchToProps = dispatch => ({
+    getSearchResults: query => dispatch(actionList.searchShows(query)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchView);

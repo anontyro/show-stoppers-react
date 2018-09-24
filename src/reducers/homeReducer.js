@@ -2,6 +2,7 @@ import * as actionType from '../data/actions';
 
 const initalState = {
   nowShowingList: [],
+  searchResults: []
 };
 
 export default (state = initalState, action) => {
@@ -22,6 +23,13 @@ export default (state = initalState, action) => {
       ...state,
       nowShowingList: action.value,
     };
+  }
+
+  if (action.type === actionType.SEARCH_SHOWS) {
+    return {
+      ...state,
+      searchResults: action.value
+    }
   }
 
   return state;

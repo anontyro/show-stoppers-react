@@ -69,6 +69,7 @@ export const setShowDetail = (show) => {
     }
 }
 
+// dispatch the season object to the redux store
 export const getShowSeasonDetail = (list) => {
     return {
         type: actions.GET_SEASON_DETAIL,
@@ -76,6 +77,12 @@ export const getShowSeasonDetail = (list) => {
     }
 }
 
+/**
+ * Get the season details containing all the episodes and info
+ * for that season
+ * @param {*} showId 
+ * @param {*} season 
+ */
 export const showSeasonDetail = (showId, season) => {
     const apiHandler = new ApiHandler();
 
@@ -86,6 +93,27 @@ export const showSeasonDetail = (showId, season) => {
                 console.log(season);
                 dispatch(getShowSeasonDetail(season));
             });
+    }
+}
+
+export const getSearchResults = (list) => {
+    return {
+        type: actions.SEARCH_SHOWS,
+        value: list
+    }
+}
+
+export const searchShows = (query) => {
+
+    const apiHandler = new ApiHandler();
+
+    return dispatch => {
+        apiHandler.searchShows(encodeURI(query))
+        .then(response => response.response)
+        .then(list => {
+            console.log(list);
+            dispatch(getSearchResults(list));
+        });
     }
 
 }
