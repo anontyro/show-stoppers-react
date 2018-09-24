@@ -40,8 +40,8 @@ class ApiHandler {
      * Get the search for the show with a user defined query string
      * @param {*} q must be URL Encoded query string
      */
-    getShowSearch(q) {
-        const endpoint = GlobalVars.tvRoutes.getShowSearch + q;
+    getShowSearch(q, page = 1) {
+        const endpoint = GlobalVars.tvRoutes.getShowSearch + q + '/' + page;
         return this.genericFetchGet(endpoint);
     }
 
