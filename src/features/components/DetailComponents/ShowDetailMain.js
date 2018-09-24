@@ -1,12 +1,11 @@
 import React from 'react';
 import GlobalVar from '../../../data/GlobalVars';
 import './ShowDetailMain.css';
-
+import ShowSeasonList from './ShowSeasonList';
 
 const ShowDetailMain = (props) => {
 
     const onSeasonBtn = (number) => {
-        console.log(number);
         props.updateSeason(props.show.id, number);
     }
 
@@ -26,8 +25,6 @@ const ShowDetailMain = (props) => {
         return seasonList;
     }
 
-
-
     return (
         <div className='detail-main-container'>
             <div className="header-tabs">
@@ -37,7 +34,12 @@ const ShowDetailMain = (props) => {
                 Seasons: 
                 {buildSeasonList(props.show.seasons)}
             </p>
-            <p>{props.show.name}</p>
+            {/* <p>{props.show.name}</p> */}
+            <div className="seasons">
+                <ShowSeasonList season = {props.season}>
+
+                </ShowSeasonList>
+            </div>
         </div>
     );
 };

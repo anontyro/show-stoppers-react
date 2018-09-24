@@ -42,7 +42,8 @@ class ShowDetailView extends Component {
                     <ShowDetailMain 
                         show={this.props.showDetail} 
                         similarShows={this.props.similarShows}
-                        updateSeason = {this.updateSeason}>
+                        updateSeason = {this.updateSeason}
+                        season = {this.props.seasonDetail}>
                     </ShowDetailMain>
                 </div>
             );
