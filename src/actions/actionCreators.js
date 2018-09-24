@@ -78,13 +78,13 @@ export const getShowSeasonDetail = (list) => {
 
 export const showSeasonDetail = (showId, season) => {
     const apiHandler = new ApiHandler();
-    const seasonList = {};
 
     return dispatch => {
         apiHandler.getSeasonDetail(showId, season)
             .then(response => response.response)
             .then(season => {
-                dispatch(getShowSeasonDetail(seasonList));
+                console.log(season);
+                dispatch(getShowSeasonDetail(season));
             });
     }
 
