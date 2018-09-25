@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import ShowItem from './components/ShowItem';
 import * as actionList from '../actions/actionCreators';
 
 class SearchView extends Component {
@@ -8,7 +9,11 @@ class SearchView extends Component {
         super(props);
 
         this.state = {
-            query: ''
+            query: '',
+            results: [],
+            numberPages: 0,
+            page: 0,
+            totalResults: 0,
         };
 
         this.searchChange = this.searchChange.bind(this); // must bind to the this section
@@ -21,13 +26,41 @@ class SearchView extends Component {
     }
 
     searchQuery() {
-        if (this.state.query.length > 2) {
+        if (this.state.query || this.state.query.length > 2) {
+            this.setState({
+                results: []
+            })
             this.props.getSearchResults(this.state.query);
         }
     }
 
-    componentDidMount() {
+    buildResults() {
 
+        if(this.props.searchResults.results && this.state.results.length === 0) {
+            this.setState({
+                results: this.createShowGrid(this.props.searchResults.results),
+                numberPages: this.props.searchResults.total_pages,
+                page: this.props.searchResults.page,
+                totalResults: this.props.searchResults.total_results
+            })
+        }
+
+        return this.state.results;
+    }
+
+    createShowGrid(list) {
+        if(!list){
+            return;
+        }
+        const output = [];
+        for (let i = 0; i < list.length; i++) {
+            output.push(<ShowItem show={list[i]} key={list[i].id}></ShowItem>)
+        }
+        return output;
+    }
+
+    componentWillMount() {
+        
     }
 
     render() {
@@ -35,8 +68,11 @@ class SearchView extends Component {
             <div className="search-view">
                 <div className="search-bar">
                     <input type="text" value={this.state.query} onChange={this.searchChange}/>
+                    <button onClick={() => this.searchQuery()}>search</button>
                 </div>
-                <button onClick={() => this.searchQuery()}>search</button>
+                <div className="search-results">
+                    {this.buildResults()}
+                </div>
             </div>
         );
     }
