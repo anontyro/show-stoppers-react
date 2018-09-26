@@ -3,12 +3,20 @@ import { connect } from 'react-redux';
 import ShowItem from './components/ShowItem';
 import * as actionList from '../actions/actionCreators';
 import ApiHandler from '../services/http/ApiHandler';
+import './SearchView.css';
 
+/**
+ * Search View class
+ * React Component that is mapping local state to hold search information
+ * the search update method relies on a promise structure to allow for the api
+ * callback to complete correctly
+ */
 class SearchView extends Component {
 
     constructor (props) {
         super(props);
 
+        // set the inital state of the page containing the empty details
         this.state = {
             query: '',
             results: [],
@@ -20,12 +28,18 @@ class SearchView extends Component {
         this.searchChange = this.searchChange.bind(this); // must bind to the this section
     }
 
+    // on change update the query to be used as the search term
     searchChange(event) {
         this.setState({
             query: event.target.value
         });
     }
 
+
+    /**
+     * update method that will use the query and call the API to get the search
+     * results for the selected query
+     */
     searchUpdate() {
         return new Promise ((resolve, reject) => {
             const apiHandler = new ApiHandler();
@@ -37,24 +51,27 @@ class SearchView extends Component {
                 })
                 .catch(err => console.error(err));
         });
-        
     }
 
-    searchQuery() {
+    /**
+     * Main query command from the button press, uses basic validation to ensure
+     * that the query has a value and will reset the results before starting the
+     * promise to update the results
+     */
+    searchQueryBtn() {
         if (this.state.query || this.state.query.length > 2) {
             this.setState({
                 results: []
             })
-
-            this.searchUpdate()
-                .then(() => {
-                    console.log('resolved');
-                    this.forceUpdate();
-                });
-            
+            this.searchUpdate().then(() =>this.forceUpdate());
         }
     }
 
+    /**
+     * State update method that is used to update the state of the values
+     * from the API callback with the relivent details to be used whilst displaying
+     * the data
+     */
     buildResults() {
 
         if(this.props.searchResults.results && this.state.results.length === 0) {
@@ -69,29 +86,27 @@ class SearchView extends Component {
         return this.state.results;
     }
 
+    /**
+     * Ensures there is a list to produce a grid out of and if so it will
+     * create the show Items and put them in a list together
+     * @param {*} list 
+     */
     createShowGrid(list) {
         if(!list){
             return;
         }
         const output = [];
         for (let i = 0; i < list.length; i++) {
-            output.push(<ShowItem show={list[i]} key={list[i].id}></ShowItem>)
+            output.push(<ShowItem className="search-show" show={list[i]} key={list[i].id}></ShowItem>)
         }
         return output;
     }
 
-    componentWillMount() {
-        
-    }
-
-    componentDidMount() {
-
-    }
-
+    /** When the component is going to update build the new local state */
     componentWillUpdate() {
         this.buildResults();
     }
-
+    // not sure if this is required at present
     componentWillUnmount() {
         this.setState({
             results: []
@@ -103,9 +118,9 @@ class SearchView extends Component {
             <div className="search-view">
                 <div className="search-bar">
                     <input type="text" value={this.state.query} onChange={this.searchChange}/>
-                    <button onClick={() => this.searchQuery()}>search</button>
+                    <button onClick={() => this.searchQueryBtn()}>search</button>
                 </div>
-                <div className="search-results">
+                <div className="showGrid">
                     {this.state.results}
                 </div>
             </div>
