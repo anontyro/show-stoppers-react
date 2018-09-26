@@ -16,6 +16,12 @@ class ShowDetailView extends Component {
     componentDidMount() {
         const apiHandler = new ApiHandler();
 
+        if (this.props.showDetail.id && (this.props.showDetail.id !== parseInt(this.props.match.params.id))) {
+            console.log(this.props.showDetail.id);
+            console.log(this.props.match.params.id);
+            this.props.removeShow();
+        }
+
         apiHandler.getShowDetails(this.props.match.params.id)
             .then(response => {
                 return response.response
@@ -35,7 +41,7 @@ class ShowDetailView extends Component {
 
         let showView;
 
-        if (this.props.showDetail.id){
+        if (this.props.showDetail){
             showView = (
                 <div className='show-detail-container'>
                     <ShowSideInfo show = {this.props.showDetail} season = {this.props.seasonDetail}></ShowSideInfo>
@@ -71,6 +77,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     setShowDetail: show => dispatch(actionList.setShowDetail(show)),
+    removeShow: () => dispatch(actionList.setShowDetail(null)),
     getSimilarShows: id => dispatch(actionList.similarShowList(id)),
     getSeason: (showId, seasonNo) => dispatch(actionList.showSeasonDetail(showId, seasonNo)),
 
