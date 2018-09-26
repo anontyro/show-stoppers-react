@@ -111,7 +111,6 @@ export const searchShows = (query) => {
         apiHandler.getShowSearch(encodeURI(query))
         .then(response => response.response)
         .then(list => {
-            console.log(list);
             dispatch(getSearchResults(list));
         });
     }

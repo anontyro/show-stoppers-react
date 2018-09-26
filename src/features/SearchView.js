@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ShowItem from './components/ShowItem';
 import * as actionList from '../actions/actionCreators';
+import ApiHandler from '../services/http/ApiHandler';
 
 class SearchView extends Component {
 
@@ -25,12 +26,32 @@ class SearchView extends Component {
         });
     }
 
+    searchUpdate() {
+        return new Promise ((resolve, reject) => {
+            const apiHandler = new ApiHandler();
+            apiHandler.getShowSearch(encodeURI(this.state.query))
+                .then(response => response.response)
+                .then(list => this.props.setSearchResults(list) )
+                .then(() => {
+                    return resolve(this.state.results);
+                })
+                .catch(err => console.error(err));
+        });
+        
+    }
+
     searchQuery() {
         if (this.state.query || this.state.query.length > 2) {
             this.setState({
                 results: []
             })
-            this.props.getSearchResults(this.state.query);
+
+            this.searchUpdate()
+                .then(() => {
+                    console.log('resolved');
+                    this.forceUpdate();
+                });
+            
         }
     }
 
@@ -63,6 +84,20 @@ class SearchView extends Component {
         
     }
 
+    componentDidMount() {
+
+    }
+
+    componentWillUpdate() {
+        this.buildResults();
+    }
+
+    componentWillUnmount() {
+        this.setState({
+            results: []
+        });
+    }
+
     render() {
         return (
             <div className="search-view">
@@ -71,7 +106,7 @@ class SearchView extends Component {
                     <button onClick={() => this.searchQuery()}>search</button>
                 </div>
                 <div className="search-results">
-                    {this.buildResults()}
+                    {this.state.results}
                 </div>
             </div>
         );
@@ -84,6 +119,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+    setSearchResults: list => dispatch(actionList.getSearchResults(list)),
     getSearchResults: query => dispatch(actionList.searchShows(query)),
 });
 
