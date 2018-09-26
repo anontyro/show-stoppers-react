@@ -1,7 +1,7 @@
 import React from 'react';
-import GlobalVar from '../../../data/GlobalVars';
 import './ShowDetailMain.css';
 import ShowSeasonList from './ShowSeasonList';
+import ShowItem from '../../components/ShowItem';
 
 const ShowDetailMain = (props) => {
 
@@ -25,6 +25,24 @@ const ShowDetailMain = (props) => {
         return seasonList;
     }
 
+    /**
+     * Conditional rendering for the show list when the similar show array has
+     * values it will be rendered else null is returned
+     */
+    const displaySimilar = () => {
+        if (props.similarShows.length > 0) {
+            return (
+            <div className="similar-shows show-title">
+                <h3 className="my-subheader">Similar Shows</h3>
+                <div className="showGrid">
+                    {props.similarShows}
+                </div>
+            </div>
+            );
+        }
+        return null;
+    }
+
     return (
         <div className='detail-main-container'>
             <div className="header-tabs">
@@ -37,9 +55,9 @@ const ShowDetailMain = (props) => {
             {/* <p>{props.show.name}</p> */}
             <div className="seasons">
                 <ShowSeasonList season = {props.season}>
-
                 </ShowSeasonList>
             </div>
+            {displaySimilar()}
         </div>
     );
 };
