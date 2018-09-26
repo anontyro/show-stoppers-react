@@ -23,6 +23,7 @@ class SearchView extends Component {
             numberPages: 0,
             page: 0,
             totalResults: 0,
+            searching: false,
         };
 
         this.searchChange = this.searchChange.bind(this); // must bind to the this section
@@ -46,9 +47,7 @@ class SearchView extends Component {
             apiHandler.getShowSearch(encodeURI(this.state.query))
                 .then(response => response.response)
                 .then(list => this.props.setSearchResults(list) )
-                .then(() => {
-                    return resolve(this.state.results);
-                })
+                .then(() => resolve(this.state.results))
                 .catch(err => console.error(err));
         });
     }
@@ -61,9 +60,16 @@ class SearchView extends Component {
     searchQueryBtn() {
         if (this.state.query || this.state.query.length > 2) {
             this.setState({
-                results: []
+                results: [],
+                searching: true
             })
-            this.searchUpdate().then(() =>this.forceUpdate());
+            this.searchUpdate()
+            .then(() => {
+                this.setState({
+                    searching: false
+                })
+                this.forceUpdate();
+            });
         }
     }
 
@@ -114,15 +120,31 @@ class SearchView extends Component {
     }
 
     render() {
+
+        let searchResultsRender;
+
+        if (this.state.searching) {
+            searchResultsRender = (
+                <div className="searching-display">
+                    Searching...
+                </div>
+            );
+        } else {
+            searchResultsRender = (
+                <div className="showGrid">
+                    {this.state.results}
+                </div>
+            );
+        }
+
+
         return (
             <div className="search-view">
                 <div className="search-bar">
                     <input type="text" value={this.state.query} onChange={this.searchChange}/>
                     <button onClick={() => this.searchQueryBtn()}>search</button>
                 </div>
-                <div className="showGrid">
-                    {this.state.results}
-                </div>
+                {searchResultsRender}
             </div>
         );
     }
