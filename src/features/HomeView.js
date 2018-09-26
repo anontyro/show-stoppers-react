@@ -11,14 +11,27 @@ class HomeView extends Component {
   }
 
   render() {
-    return (
-      <div className='home-container'>
-        <h1>Default homepage</h1>
-        <div className='showGrid'>
-          {this.props.nowShowing}
+
+    let homeRender;
+
+    if(this.props.nowShowing.length > 0) {
+      homeRender = (
+        <div className='home-container'>
+          <h1>Default homepage</h1>
+          <div className='showGrid'>
+            {this.props.nowShowing}
+          </div>
         </div>
-      </div>
-    );
+      );
+    } else {
+      homeRender = (
+        <div className="page-loader">
+          Loading...
+        </div>
+      );
+    }
+
+    return <div>{homeRender}</div>;
   }
 }
 

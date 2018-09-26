@@ -35,7 +35,7 @@ class ShowDetailView extends Component {
 
         let showView;
 
-        if (this.props.showDetail){
+        if (this.props.showDetail.id){
             showView = (
                 <div className='show-detail-container'>
                     <ShowSideInfo show = {this.props.showDetail} season = {this.props.seasonDetail}></ShowSideInfo>
